@@ -1,11 +1,15 @@
 #include <stdio.h>
 
-void makeStars(int space, int check, int newBetweenSpace, int index, int firstIndex);
+void makeStars(int inputSpace, int index);
 void makeTri(int line);
-
+void oddPlay(int space);
+void evenPlay(int space);
 char *Stars[3] = {"*", "* *", "*****"};
 int betweenSpace = 0;
-int space = 0;
+int firstSpace = 0;
+int odd = 1, even = 2;
+int iterator=0;
+
 
 int main(line){
 	scanf("%d", &line);
@@ -13,29 +17,53 @@ int main(line){
 }
 
 void makeTri(int line){
-	space = (line*2-1)/2;
-	for(int i=1;i<=line;i++){
-		if(i%3==0 && i>=3) 
-			makeStars(space, 1,i*2-1, 3, i);
-		else
-			makeStars(space, 0, 0, i%3, i);
+	firstSpace = (line*2-1)/2;
+	for(int i=1;i<=line/3;i++){
+		makeStars(firstSpace, i);
 	}	
 }
 
-void makeStars(int inputSpace, int check, int newBetweenSpace, int index,int firstIndex){
-		for(int i = 0; i < inputSpace;i++)
+void makeStars(int inputSpace, int index){
+	if(index %2==1){
+		//홀슈
+		evenPlay(inputSpace);
+		betweenSpace = index*3*2-1;
+	}else{
+		//짝수
+		oddPlay(inputSpace);
+		betweenSpace = index*3*2-1;
+	}
+	// if(index % 3 ==0){
+	// 	betweenSpace = 2*index-1;
+	// 	if((betweenSpace / 5)% 2 == 0){
+	// 		//짝수
+	// 		evenPlay(betweenSpace, index);
+	// 		betweenSpace-=2;
+	// 	}else {
+	// 		oddPlay(betweenSpace, index);
+	// 	}
+	// }
+	firstSpace-=3;
+
+	printf("\n");
+}
+
+void oddPlay(int space){
+	for(int i =0; i<3;i++){
+		for(int i = 0;i<space;i++)
 			printf(" ");
-		printf("%s",Stars[index-1]);
-		for(int j = 0; j < betweenSpace; j++)
-			printf(" ");
-		if(firstIndex > 3)
-		printf("%s",Stars[index-1]);
-		if(check){
-			printf("%d", newBetweenSpace);
-			betweenSpace = newBetweenSpace;
-		}else{
-			betweenSpace-=2;
-		}
 		space-=1;
-		printf("\n");
+	}
+}
+
+void evenPlay(int space){
+	for(int i =0; i<3;i++){
+		for(int i = 0;i<space;i++)
+			printf(" ");
+		printf("%s\n", Stars[i]);
+		for(int i = 0; i <betweenSpace;i++)
+			printf(" ");
+		betweenSpace-=2;
+		space-=1;
+	}
 }
