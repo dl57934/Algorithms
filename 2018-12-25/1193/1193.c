@@ -2,42 +2,15 @@
 
 int main(N){
 	scanf("%d", &N);
-	int count =2, sameCheck=1;
-	int i =1, j=2;
+	int floor=1;
 
-	if(N==1){
-		printf("1/1");
-		return 0;
+	while(N-floor>0){
+		N-=floor;
+		floor+=1;
 	}
 
-	for (;;){
-		if(count == N){
-			printf("%d/%d", i, j);
-			break;
-		}
-		if(i == 1 || j == 1){
-			if(i > j){
-				if(i%2==0)
-					i+=1;
-				else 
-					i-=1, j+=1;
-				sameCheck = 1;
-			}else if(i < j){
-				if(j%2 == 0)
-					i+=1, j-=1;
-				else 
-					j+=1;
-				sameCheck=0;
-			}
-		}else{
-				if(sameCheck)
-					i-=1, j+=1;
-				else 
-					i+=1, j-=1;
-
-		}
-		
-		count+=1;
-	}
-
+	if(floor%2==0)
+		printf("%d/%d", N, floor-N+1);
+	else	
+		printf("%d/%d", floor-N+1, N);
 }
