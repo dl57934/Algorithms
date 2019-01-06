@@ -1,25 +1,74 @@
 import java.io.*;
 import java.util.*;
 
+// class Graph{
+// 	class Node{
+// 		int data;
+// 		LinkedList<Node> adjacent;
+// 		boolean marked;
+// 		Node(int data){
+// 			this.data = data;
+// 			this.marked = false;
+// 			adjacent = new LinkedList<Node>();
+// 		}
+// 	}
+// 	Node[] nodes;
+// 	Graph(int size){
+// 		nodes = new Node[size];
+// 		for(int i = 1; i < size; i++){
+// 			nodes[i] = new Node(i);
+// 		}
+// 	}
+// 	void addEdge(int l1, int l2){
+// 		Node n1 = nodes[l1];
+// 		Node n2 = nodes[l2];
+// 		if(!n1.adjacent.contains(n2))
+// 			n1.adjacent.add(n2);
+// 		if(!n2.adjacent.contains(n1))
+// 			n2.adjacent.add(n1);
+// 	}
+
+// 	void dfsR(Node r){
+// 		if (r == null) return;
+// 		r.marked = true;
+// 		visit(r);
+// 		for(Node n : r.adjacent){
+// 			if(!n.marked)
+// 				dfsR(n);
+// 		}
+// 	}
+
+// 	void visit(Node n){
+// 		System.out.print(n.data+" ");
+// 	}
+
+// 	void dfsR(int idx){
+// 		Node R = nodes[idx];
+// 		dfsR(R);
+// 	}
+// }
+
 class Graph{
 	class Node{
 		int data;
 		LinkedList<Node> adjacent;
-		boolean marked;
+		boolean visit;
 		Node(int data){
+			this.adjacent = new LinkedList<Node>();
 			this.data = data;
-			this.marked = false;
-			adjacent = new LinkedList<Node>();
+			this.visit =false;
 		}
 	}
-	Node[] nodes;
-	Graph(int size){
+	Node []nodes;
+
+	public Graph(int size){
 		nodes = new Node[size];
 		for(int i = 1; i < size; i++){
 			nodes[i] = new Node(i);
 		}
 	}
-	void addEdge(int l1, int l2){
+
+	public void addEdge(int l1, int l2){
 		Node n1 = nodes[l1];
 		Node n2 = nodes[l2];
 		if(!n1.adjacent.contains(n2))
@@ -28,25 +77,26 @@ class Graph{
 			n2.adjacent.add(n1);
 	}
 
-	void dfsR(Node r){
-		if (r == null) return;
-		r.marked = true;
-		visit(r);
-		for(Node n : r.adjacent){
-			if(!n.marked)
+	public void dfsR(int i){
+		dfsR(nodes[i]);
+	}
+
+	public void dfsR(Node node){
+		if(node == null) return;
+		node.visit =true;
+		visit(node);
+		for(Node n: node.adjacent){
+			if(!n.visit)
 				dfsR(n);
 		}
+
 	}
 
-	void visit(Node n){
-		System.out.print(n.data+" ");
-	}
-
-	void dfsR(int idx){
-		Node R = nodes[idx];
-		dfsR(R);
+	public void visit(Node node){
+		System.out.print(node.data+" ");
 	}
 }
+
 
 class Main{
 	public static void main(String[] args) throws Exception{
