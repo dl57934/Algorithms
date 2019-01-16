@@ -1,44 +1,26 @@
 #include <stdio.h>
 
-#define P 1000000007
-
-long long factorial(long long operator, long long limit);
-long long calculOrder(long long operator, long long limit);
+long long factorial(int n, int r);
 
 int main(){
-	long long n, k;
-	long long result;
-	scanf("%lld %lld", &n, &k);
-	long long A = factorial(1, n);
-	long long B = factorial(1, k);
-	B = factorial(B, n-k);
-	B = calculOrder(B, P-2);
+	long long n=1, k=1;
 
-	B%=P;
-	result = A*B;
-	result%=P;
-	printf("%lld", result);
+	while(1){
+		scanf("%lld %lld", &n, &k);
+		if(n==0 && k==0)
+			break;
+		long long result = factorial(n, k);
+		printf("%lld\n", result);
+	}
 }
 
-long long factorial(long long operator, long long limit){
-	for(long long i = 1; i <= limit;i++){
-		operator*=i;
-		operator%=P;
-	}
-	return operator;
-}
+long long factorial(int n, int r){
+    if (r == 0 || n == r)
+        return 1;
 
-long long calculOrder(long long operator, long long limit){
-	long long result = 1;
+    long long q = 1;
+    for (int i = 1; i <= r; i++)
+        q = q * n-- / i;
 
-	while(limit>0){
-		if(limit%2!=0){
-			result*=operator;
-			result%=P;
-		}
-		operator*=operator;
-		operator%=P;
-		limit/=2;
-	}
-	return result;
+    return q;
 }
