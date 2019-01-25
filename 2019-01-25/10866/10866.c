@@ -33,6 +33,7 @@ int size();
 int empty();
 int front();
 int back();
+int isDequeZero();
 
 int main(){
 	int N;
@@ -65,28 +66,23 @@ void whatIsOrder(char order[]){
 			scanf("%d", &value);
 			push_back(value);
 		}	
-		else if(strcmp(order, POP_FRONT)==0){
+		else if(strcmp(order, POP_FRONT)==0)
 			printf("%d\n", pop_front());
-		}
-		else if(strcmp(order, POP_BACK)==0){
+		else if(strcmp(order, POP_BACK)==0)
 			printf("%d\n", pop_back());
-		}
-		else if(strcmp(order, SIZE)==0){
+		else if(strcmp(order, SIZE)==0)
 			printf("%d\n",size());
-		}
-		else if(strcmp(order, EMPTY)==0){
+		else if(strcmp(order, EMPTY)==0)
 			printf("%d\n",empty());
-		}	
-		else if(strcmp(order, FRONT)==0){
+		else if(strcmp(order, FRONT)==0)
 			printf("%d\n",front());
-		}
-		else if(strcmp(order, BACK)==0){
+		else if(strcmp(order, BACK)==0)
 			printf("%d\n",back());	
-		}			
+		
 }
 
 void push_front(int value){
-	if(dequeSize == 0){
+	if(isDequeZero()){
 		deque->value = value;
 		dequeSize++;
 	}else{
@@ -98,7 +94,7 @@ void push_front(int value){
 }
 
 void push_back(int value){
-	if(dequeSize == 0){
+	if(isDequeZero()){
 		deque->value = value;
 		dequeSize++;
 	}else{
@@ -119,33 +115,27 @@ node* making_node(int value){
 }
 
 int pop_front(){
-	if(dequeSize == DEQUE_SIZE_ZERO)
+	if(isDequeZero())
 		return -1;
-	if(dequeSize == 1){
-		int result = deque->value;	
-		dequeSize--;
-		return result;
-	}else{
-		int result = deque->value;
+	
+	int result = deque->value;
+	if(dequeSize != 1)
 		deque = deque->back;
-		dequeSize--;
-		return result;
-	}
+
+	dequeSize--;
+	return result;
 }
 
 int pop_back(){
-	if(dequeSize == DEQUE_SIZE_ZERO)
+	if(isDequeZero())
 		return -1;
-	if(dequeSize == 1){
-		int result = deque->value;	
-		dequeSize--;
-		return result;
-	}else{
-		int result = last->value;
+
+	int result = last->value;
+	if(dequeSize != 1)
 		last = last->front;
-		dequeSize--;
-		return result;
-	}
+		
+	dequeSize--;
+	return result;
 }
 
 int size(){
@@ -153,19 +143,23 @@ int size(){
 }
 
 int empty(){
-	if(dequeSize == DEQUE_SIZE_ZERO)
+	if(isDequeZero())
 		return 1;
 	return 0;
 }
 
 int front(){
-	if(dequeSize == DEQUE_SIZE_ZERO)
+	if(isDequeZero())
 		return -1;
 	return deque->value;
 }
 
 int back(){
-	if(dequeSize == DEQUE_SIZE_ZERO)
+	if(isDequeZero())
 		return -1;
 	return last->value;
+}
+
+int isDequeZero(){
+	return dequeSize == DEQUE_SIZE_ZERO;
 }
