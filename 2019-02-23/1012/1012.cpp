@@ -1,17 +1,20 @@
-#include <stdio.h>
+#include <cstdio>
+#include <queue>
+
+using namespace std;
 
 int xpos[4] = {0, -1, 0, 1};
 int ypos[4] = {-1, 0, 1, 0};
-int map[51][51];
+int map[51][51]={0, };
 int warms = 0;
 int M, N, K;
-	
+queue <pair<int, int> > qu;	
 
 void link(int from, int to);
 void input(int T);
 void findCabbage();
 int dfs(int x, int y);
-int bfs(int x, int y);
+void bfs(int x, int y);
 
 int main(){
 	int T;
@@ -39,7 +42,7 @@ void findCabbage(){
 	for(int i = 0; i < M; i++)
 		for(int j = 0; j < N; j++){
 			if(map[i][j] == 1){
-				dfs(i, j);
+				bfs(i, j);
 				warms+=1;
 			}
 		}
@@ -55,6 +58,20 @@ int dfs(int x, int y){
 	return 0;	
 }
 
-int bfs(int x, int y){
-	
+void bfs(int x, int y){
+	qu.push(make_pair(x, y));
+	map[x][y] = 0;
+	while(!qu.empty()){
+		pair <int, int>xy = qu.front();
+		qu.pop();
+		for(int i = 0; i < 4; i++){
+			int ax = xy.first + xpos[i];
+            int ay = xy.second + ypos[i];
+			if(ax>=0 && ay>=0 && ax<M && ay<N && map[ax][ay] == 1){
+				map[ax][ay] = 0;
+				qu.push(make_pair(ax, ay));
+			}
+		}
+	}
 }
+
