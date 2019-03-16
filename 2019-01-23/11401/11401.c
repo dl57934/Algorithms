@@ -2,48 +2,45 @@
 
 #define mod 1000000007
 
-long long facto(int limit);
-long long calculate(long long denominator);
+long long facto(long long operator, long long limit);
+long long calculate(long long limit, long long operator);
 
 int main(){
-	long long N, K, nMinK;
-	long long denominator;
-	scanf("%lld %lld", &N, &K);
-	nMinK = N-K;
-	N = facto(N);
-	K = facto(K);
-	nMinK = facto(nMinK);
-	denominator = (K*nMinK)%mod;
-	denominator =calculate(denominator)%mod;
-	long long result = (N * denominator)%mod;
+	int N, K;
+	long long result;
+	long long molecule,denominator;
+
+	scanf("%d %d", &N, &K);
+
+	molecule = facto(1, N);
+ 	denominator = facto(1, K);
+	denominator = facto(denominator, N-K);
+
+	result = (molecule*calculate(mod-2 ,denominator))%mod;
+
 	printf("%lld", result);
 }
 
-long long facto(int limit){
-	long long result = 1;
-	for(int i = 2; i<=limit; i++){
-		result*=i;
-		result%=mod;
+long long facto(long long operator, long long limit){
+	for(int i = 1; i<=limit; i++){
+		operator*=i;
+		operator%=mod;
 	}
-	return result%mod;
+	return operator%mod;
 }
 
-long long calculate(long long denominator){
-	long long result=1;
-	long long limit = mod-2;
-	while(limit > 0){
-		if(limit % 2!= 0){
-			result*=denominator;
+long long calculate(long long limit, long long operator){
+	long long result = operator;
+	long long power = 1;
+	while(limit>0){
+		if(limit%2!=0){
+			result*=operator;
 			result%=mod;
 		}
-		denominator*=denominator;
-		denominator%=mod;
+		operator*=operator;
+		operator%=mod;
+		power+=1;
 		limit/=2;
 	}
 	return result%mod;
 }
-
-
-
-
-

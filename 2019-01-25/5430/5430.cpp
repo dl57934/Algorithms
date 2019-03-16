@@ -55,6 +55,7 @@ void init(int *digit, int *value, int *numCount){
 	*value = 0;
 	*numCount = 0;
 }
+
 void inputDeque(int numCount, int value){
 	if(numCount == 1)
 		dq.push_back(value/100);	

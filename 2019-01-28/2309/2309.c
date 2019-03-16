@@ -9,6 +9,7 @@ int main(){
 	int sum = 0, cnt=0;
 	for(int i = 0; i < 9; i++)
 		scanf("%d", &arr[i]);
+
 	mergesort(0, 8);
 
 	for(int i = 0; i < 9; i++){
@@ -20,6 +21,7 @@ int main(){
 					cnt++;
 				}
 			}
+			
 			if(sum == 100){
 				for(int i = 0; i < 7; i++)
 					printf("%d\n", arr[selectarr[i]]);

@@ -15,8 +15,11 @@ int main(){
 }
 
 long long factorial(int n, int r){
-    if (r == 0 || n == r)
+    if (n == 0 || r == 0 || n == r)
         return 1;
+
+    if (n - r < r)
+        r = n - r;
 
     long long q = 1;
     for (int i = 1; i <= r; i++)

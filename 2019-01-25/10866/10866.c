@@ -82,31 +82,30 @@ void whatIsOrder(char order[]){
 }
 
 void push_front(int value){
-	if(isDequeZero()){
+	if(isDequeZero())
 		deque->value = value;
-		dequeSize++;
-	}else{
+	else{
 		node* temp = making_node(value);
 		deque->front = temp;
 		temp->back = deque;
 		deque = temp;
 	}
+	dequeSize++;
 }
 
 void push_back(int value){
-	if(isDequeZero()){
-		deque->value = value;
-		dequeSize++;
-	}else{
+	if(isDequeZero())
+		deque->value = value;	
+	else{
 		node* temp = making_node(value);
 		last->back = temp;
 		temp->front = last;
 		last = temp;
 	}
+	dequeSize++;
 }
 
 node* making_node(int value){
-	dequeSize++;
 	node* temp = malloc(sizeof(node));
 	temp->back = malloc(sizeof(node));
 	temp->front = malloc(sizeof(node));

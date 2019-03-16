@@ -15,17 +15,14 @@ int main(){
 		scanf("%d", &n);
 		for(int i =0; i < n; i++){
 			cin >> order[i] >> type[i];
-			if(info.find(type[i]) == info.end()){
+			if(info.find(type[i]) == info.end())
 				info[type[i]] = 1;
-			}
-			else{
+			else
 				info[type[i]] += 1;
-
-				}
 		}
-		for (map<string,int>::iterator j= info.begin(); j != info.end(); j++){
+		for (map<string,int>::iterator j= info.begin(); j != info.end(); j++)
 			 result *= j->second+1;
-			 }
+			 
 		cout << result-1<<endl;	
 		info.clear();
 		result = 1;

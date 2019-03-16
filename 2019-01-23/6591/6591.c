@@ -4,7 +4,7 @@ int isBreak(int n, int k);
 long long nCk(long long n, long long k);
 
 int main(){
-	long long n, k;
+	long long n, k, t;
 	for(;;){
 		scanf("%lld %lld", &n, &k);
 		if(isBreak(n, k))

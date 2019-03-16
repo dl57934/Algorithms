@@ -24,9 +24,9 @@ class Main{
 				if(isEmpty())
 					printResult(-1);
 				else{
-					printResult(stack.peek());
+					printResult(peek());
 					if(command[0].equals(POP))
-					stack.pop();
+						pop();
 				}
 			}
 
@@ -36,18 +36,25 @@ class Main{
 				else
 					printResult(0);
 			}
+
+			else if(command[0].equals(SIZE))
+				printResult(size());
 			
-			else if(command[0].equals(SIZE)){
-				printResult(stack.size());
-			}
 			
 		}
+	}
+
+	private static int peek(){
+		return stack.peek();
 	}
 
 	private static Boolean isEmpty(){
 		return stack.empty();
 	}
 
+	private static int getSize(){
+		return stack.size();
+	}
 
 	private static void printResult(int num){
 		System.out.println(num);
@@ -55,5 +62,9 @@ class Main{
 
 	private static void push(int num){
 		stack.push(num);
+	}
+
+	private static int pop(){
+		stack.pop();
 	}
 }
