@@ -26,6 +26,6 @@ void checkSamePoint(double d, double r1, double r2){
 		printf("2\n");
 	else if(pow(r1 + r2, 2) == d || pow(r1 - r2, 2) == d)
 		printf("1\n");
-	else if( d == 0 || pow(r1+r2, 2) < d || pow(r1-r2, 2)>d)
+	else 
 		printf("0\n");
 }

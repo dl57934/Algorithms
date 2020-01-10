@@ -10,7 +10,7 @@ int main(){
 		printf("-1");
 		return 0;
 	}
-	long long answer = (long long)ceil((double)abs(A)/(double)(C-B));
+	long long answer = (long long)ceil((double)(A)/(double)(C-B));
 	
 	if((A + B * answer) == C *answer)
 		printf("%lld", answer+1);	
