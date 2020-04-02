@@ -5,10 +5,12 @@ using namespace std;
 
 int N, M;
 int map[802][802];
+int path[802][802];
 int INF = 987654321;
 
 void input();
 void floyd();
+void printPath(int start, int path);
 
 int main(){
 	input();
@@ -16,12 +18,10 @@ int main(){
 
 	for(int y = 1; y <= N; y++){
 		for(int x = 1; x <= N; x++){
-			if(map[y][x] == INF)
-				printf("0 ");
-			else
-				printf("%d ", map[y][x]);
+			printf("start %d ", y);
+			printPath(y, x);
+			printf(" end %d\n", x);
 		}
-		printf("\n");
 	}
 }
 
@@ -37,9 +37,11 @@ void input(){
 			map[startCity][endCity] = min(map[startCity][endCity], weight);
 	}
 	for(int y = 1; y <= N; y++)
-		for(int x = 1; x <= N; x++)
+		for(int x = 1; x <= N; x++){
 			if(map[y][x] == 0)
 				map[y][x] = INF;
+			path[y][x] = INF;
+		}
 }
 
 void floyd(){
@@ -48,9 +50,19 @@ void floyd(){
 			for(int end = 1; end <= N; end++){
 				if(start == end)
 					map[start][end] = 0;
-				else
-					map[start][end] = min(map[start][end], map[start][mid] + map[mid][end]);
+				else if(map[start][end] > map[start][mid] + map[mid][end]) {					
+					map[start][end] = map[start][mid] + map[mid][end];
+					path[start][end] = mid;
+				}
 			}
 		}
 	}
+}
+
+void printPath(int start, int end){
+	if(path[start][end] == INF)
+		return;
+	printPath(start, path[start][end]);
+	printf("%d ", path[start][end]);
+	printPath(path[start][end], end);
 }
