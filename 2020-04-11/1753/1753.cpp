@@ -47,7 +47,6 @@ void input(){
 
 
 void dajickStra(){
-
 	while(!pq.empty()){
 		pair<int, int> now = pq.top();
 		int nowWeight = now.first;
